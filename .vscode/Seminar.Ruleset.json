@@ -1,0 +1,19 @@
+{
+    "name": "Seminar ruleset",
+    "rules": [
+        {                    
+            "id": "AA0074",                    
+            "action": "None",
+            "justification" : "Variable names will be changed at a later stage."
+        },        {                    
+            "id": "AA0470",                    
+            "action": "None",
+            "justification" : "Variable names will be changed at a later stage."
+        },
+        {                    
+            "id": "AA0072",                    
+            "action": "None",
+            "justification" : "Variable names will be changed at a later stage."
+        }
+    ]
+}
