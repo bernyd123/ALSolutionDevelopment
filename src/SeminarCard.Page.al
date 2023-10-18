@@ -1,6 +1,7 @@
 // CSD1.00 - 2023-10-16 - B. During
 //   Chapter 2 - Lab 2
 //     - Created new page
+//     - Added Teaching Tips and in app tours
 
 page 50000 "Seminar Card"
 {
@@ -9,6 +10,10 @@ page 50000 "Seminar Card"
     SourceTable = Seminar;
     UsageCategory = Lists;
     ApplicationArea = All;
+    AdditionalSearchTerms = 'Course, Conference, Training';
+
+    AboutTitle = 'About seminar details';
+    AboutText = 'With the **Seminar Card** you manage information about a seminar and specify the terms of business, such as the price and duration. From here you can also drill down on past and ongoing sales activity.';
 
     layout
     {

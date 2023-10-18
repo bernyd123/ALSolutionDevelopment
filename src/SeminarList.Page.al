@@ -1,6 +1,7 @@
 // CSD1.00 - 2023-10-16 - B. During
 //   Chapter 2 - Lab 2
 //     - Created new page
+//     - Added Teaching Tips and in app tours
 
 page 50001 "Seminar List"
 {
@@ -11,7 +12,10 @@ page 50001 "Seminar List"
     SourceTable = Seminar;
     ApplicationArea = All;
     UsageCategory = Lists;
+    AdditionalSearchTerms = 'Course, Conference, Training';
 
+    AboutTitle = 'About seminars';
+    AboutText = 'Here you overview all your seminars you present, their price, and the seminar statistics. With [Seminar Setup](?page=50002 "Opens the Seminar Setup") you can setup everything for this module.';
 
     layout
     {
@@ -33,11 +37,17 @@ page 50001 "Seminar List"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Demo Code;';
+
+                    AboutTitle = 'Seminar duration in days';
+                    AboutText = 'Here you can see how long a seminar is in days. In other words, 5 means that the seminar is a 5-day seminar.';
                 }
                 field("Seminar Price"; Rec."Seminar Price")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Demo Code;';
+
+                    AboutTitle = 'Price of the Seminar.';
+                    AboutText = 'Here you can see the **Price** of a Seminar in Local Currency. This is for the entire seminar, and is not a price per day.';
                 }
                 field("Gen. Prod. Posting Group"; Rec."Gen. Prod. Posting Group")
                 {
