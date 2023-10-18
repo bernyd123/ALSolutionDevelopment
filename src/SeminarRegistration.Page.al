@@ -3,9 +3,14 @@ page 50010 "Seminar Registration"
     // CSD1.00 - 2013-10-17 - B. During
     //   Chapter 3 - Lab 2
     //     - Created new page
+    //   Lab 2 Completed
+    //     - Changed the page type
+    //     - Added the lines subpage and linked it to the main page
+    //     - Changed the Customer Details factbox to correctly show the Bill-to Customer
+    //     - Added the Seminar FactBox to the page
 
     Caption = 'Seminar Registration';
-    PageType = Card;
+    PageType = Document;
     SourceTable = "Seminar Registration Header";
     ApplicationArea = All;
     UsageCategory = Documents;
@@ -83,6 +88,10 @@ page 50010 "Seminar Registration"
                     ToolTip = 'Demo Code;';
                 }
             }
+            part(SeminarLines; "Seminar Registration Subform")
+            {
+                SubPageLink = "Document No." = field("No.");
+            }
             group("Seminar Room")
             {
                 field("Room Resource No."; Rec."Room Resource No.")
@@ -147,9 +156,16 @@ page 50010 "Seminar Registration"
         }
         area(factboxes)
         {
+            part(SeminarDetailsFactbox; "Seminar Details FactBox")
+            {
+                ApplicationArea = All;
+                SubPageLink = "No." = field("Seminar No.");
+            }
             part(CustomerDetails; "Customer Details FactBox")
             {
                 ApplicationArea = All;
+                Provider = SeminarLines;
+                SubPageLink = "No." = field("Bill-to Customer No.");
             }
             systempart(Links; Links)
             {

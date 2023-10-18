@@ -1,6 +1,8 @@
 // CSD1.00 - 2013-10-17 - B. During
 //   Chapter 3 - Lab 2
 //     - Created new page
+//   Lab 2
+//     - Added the Seminar Details Factbox
 
 page 50013 "Seminar Registration List"
 {
@@ -69,6 +71,11 @@ page 50013 "Seminar Registration List"
             systempart(Notes; Notes)
             {
                 ApplicationArea = All;
+            }
+            part(SeminarDetailsFactbox; "Seminar Details FactBox")
+            {
+                ApplicationArea = All;
+                SubPageLink = "No." = field("Seminar No.");
             }
         }
     }

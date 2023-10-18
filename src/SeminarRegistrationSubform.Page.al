@@ -1,13 +1,16 @@
 // CSD1.00 - 2013-10-17 - B. During
 //   Chapter 3 - Lab 2
 //     - Created new page
+//   Lab 2
+//     - Changed the page type and added the AutoSplitKey
 
 page 50011 "Seminar Registration Subform"
 {
     Caption = 'Lines';
     DelayedInsert = true;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Seminar Registration Line";
+    AutoSplitKey = true;
 
     layout
     {
