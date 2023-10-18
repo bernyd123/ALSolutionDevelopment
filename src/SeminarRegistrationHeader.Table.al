@@ -1,9 +1,16 @@
 // CSD1.00 - 2023-10-17 - B. During
 //   Chapter 3 - Lab 1
 //     - Created new table
+//   Completed the lab exercises for Lab 3A
+//     - Changed Instructor Code to Instructor Resource No.
+//     - Changed Room Code to Room Resource No.
+//     - Added code to OnDelete to check if seminar is Registered and block Deletion if it is.
+//     - Create InitRecord Procedure and move code to InitRecord 
 
 table 50010 "Seminar Registration Header"
 {
+    Caption = 'Seminar Registration Header';
+
     fields
     {
         field(1; "No."; Code[20])
@@ -66,9 +73,9 @@ table 50010 "Seminar Registration Header"
         {
             Caption = 'Seminar Name';
         }
-        field(5; "Instructor Code"; Code[10])
+        field(5; "Instructor Resource No."; Code[10])
         {
-            Caption = 'Instructor Code';
+            Caption = 'Instructor Resource No.';
             TableRelation = Resource WHERE(Type = CONST(Person));
 
             trigger OnValidate()
@@ -78,7 +85,7 @@ table 50010 "Seminar Registration Header"
         }
         field(6; "Instructor Name"; Text[100])
         {
-            CalcFormula = Lookup(Resource.Name WHERE("No." = FIELD("Instructor Code"), Type = CONST(Person)));
+            CalcFormula = Lookup(Resource.Name WHERE("No." = FIELD("Instructor Resource No."), Type = CONST(Person)));
             Caption = 'Instructor Name';
             Editable = false;
             FieldClass = FlowField;
@@ -98,15 +105,16 @@ table 50010 "Seminar Registration Header"
         }
         field(10; "Minimum Participants"; Integer)
         {
+            Caption = 'Minimum Participants';
         }
-        field(11; "Room Code"; Code[10])
+        field(11; "Room Resource No."; Code[10])
         {
-            Caption = 'Room Code';
+            Caption = 'Room Resource No.';
             TableRelation = Resource WHERE(Type = CONST(Machine));
 
             trigger OnValidate()
             begin
-                IF "Room Code" = '' THEN BEGIN
+                if "Room Resource No." = '' then begin
                     "Room Name" := '';
                     "Room Address" := '';
                     "Room Address 2" := '';
@@ -114,8 +122,8 @@ table 50010 "Seminar Registration Header"
                     "Room City" := '';
                     "Room County" := '';
                     "Room Country/Reg. Code" := '';
-                END ELSE BEGIN
-                    SeminarRoom.GET("Room Code");
+                end else begin
+                    SeminarRoom.GET("Room Resource No.");
                     "Room Name" := SeminarRoom.Name;
                     "Room Address" := SeminarRoom.Address;
                     "Room Address 2" := SeminarRoom."Address 2";
@@ -198,10 +206,10 @@ table 50010 "Seminar Registration Header"
                              FIELDCAPTION("Seminar Price"),
                              SeminarRegLine.TABLECAPTION)
                         then begin
-                            REPEAT
+                            repeat
                                 SeminarRegLine.VALIDATE("Seminar Price", "Seminar Price");
                                 SeminarRegLine.Modify();
-                            UNTIL SeminarRegLine.Next() = 0;
+                            until SeminarRegLine.Next() = 0;
                             Modify();
                         end;
                 end;
@@ -283,7 +291,7 @@ table 50010 "Seminar Registration Header"
         {
             Clustered = true;
         }
-        key(Key2; "Room Code")
+        key(Key2; "Room Resource No.")
         {
             SumIndexFields = Duration;
         }
@@ -295,6 +303,8 @@ table 50010 "Seminar Registration Header"
 
     trigger OnDelete()
     begin
+        TESTFIELD(Status, Status::Canceled);
+
         SeminarRegLine.RESET();
         SeminarRegLine.SETRANGE("Document No.", "No.");
         SeminarRegLine.SETRANGE(Registered, TRUE);
@@ -326,11 +336,7 @@ table 50010 "Seminar Registration Header"
             NoSeriesMgt.InitSeries(SeminarSetup."Seminar Registration Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
-        IF "Posting Date" = 0D THEN
-            "Posting Date" := WORKDATE();
-        "Document Date" := WORKDATE();
-        SeminarSetup.GET();
-        NoSeriesMgt.SetDefaultSeries("Posting No. Series", SeminarSetup."Posted Seminar Reg. Nos.");
+        InitRecord();
     end;
 
     var
@@ -359,8 +365,17 @@ table 50010 "Seminar Registration Header"
             SeminarSetup.TESTFIELD("Seminar Registration Nos.");
             NoSeriesMgt.SetSeries("No.");
             Rec := SeminarRegHeader;
-            EXIT(TRUE);
-        END;
+            exit(TRUE);
+        end;
+    end;
+
+    procedure InitRecord()
+    begin
+        if "Posting Date" = 0D then
+            "Posting Date" := WORKDATE();
+        "Document Date" := WORKDATE();
+        SeminarSetup.GET();
+        NoSeriesMgt.SetDefaultSeries("Posting No. Series", SeminarSetup."Posted Seminar Reg. Nos.");
     end;
 }
 
