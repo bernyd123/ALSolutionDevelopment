@@ -20,8 +20,13 @@ permissionset 50000 SeminarPermissions
         codeunit "Seminar App Install" = X,
         codeunit "Seminar Notification Mgmt." = X,
         page "Seminar Card" = X,
+        page "Seminar Charges" = X,
         page "Seminar Comment List" = X,
         page "Seminar Comment Sheet" = X,
+        page "Seminar Details FactBox" = X,
         page "Seminar List" = X,
+        page "Seminar Registration" = X,
+        page "Seminar Registration List" = X,
+        page "Seminar Registration Subform" = X,
         page "Seminar Setup" = X;
 }
