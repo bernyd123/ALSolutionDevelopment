@@ -8,6 +8,7 @@ permissionset 50000 SeminarPermissions
         tabledata "Seminar Setup" = RIMD,
         table Seminar = X,
         table "Seminar Setup" = X,
+        codeunit "Seminar Notification Mgmt." = X,
         page "Seminar Card" = X,
         page "Seminar List" = X,
         page "Seminar Setup" = X;

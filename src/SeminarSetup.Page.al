@@ -1,6 +1,7 @@
 // CSD1.00 - 2023-10-16 - B. During
 //   Chapter 2 - Lab 2
 //     - Created new page
+//     - Added Notification to the Page to Show Guided Setup Feature
 
 page 50002 "Seminar Setup"
 {
@@ -50,6 +51,22 @@ page 50002 "Seminar Setup"
             Rec.Init();
             Rec.Insert();
         end;
+
+        if (rec."Seminar Nos." = '') and (rec."Seminar Registration Nos." = '') and (Rec."Posted Seminar Reg. Nos." = '') then
+            DoSeminarSetup();
+    end;
+
+    local procedure DoSeminarSetup()
+    var
+        SeminarNosNotification: Notification;
+        SeminarNosMessage: Label 'No. Series has not been setup.';
+        SetupNotification: Label 'Setup Default Numbers.';
+
+    begin
+        SeminarNosNotification.Message(SeminarNosMessage);
+        SeminarNosNotification.Scope := NotificationScope::LocalScope;
+        SeminarNosNotification.AddAction(SetupNotification, Codeunit::"Seminar Notification Mgmt.", 'SetupNoSeries');
+        SeminarNosNotification.Send();
     end;
 }
 
