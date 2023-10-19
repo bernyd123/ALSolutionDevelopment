@@ -5,7 +5,10 @@
 permissionset 50000 SeminarPermissions
 {
     Assignable = true;
-    Permissions = tabledata Seminar = RIMD,
+    Permissions = tabledata "Posted Seminar Charge" = RIMD,
+        tabledata "Posted Seminar Reg. Header" = RIMD,
+        tabledata "Posted Seminar Reg. Line" = RIMD,
+        tabledata Seminar = RIMD,
         tabledata "Seminar Charge" = RIMD,
         tabledata "Seminar Comment Line" = RIMD,
         tabledata "Seminar Journal Line" = RIMD,
@@ -14,6 +17,9 @@ permissionset 50000 SeminarPermissions
         tabledata "Seminar Registration Header" = RIMD,
         tabledata "Seminar Registration Line" = RIMD,
         tabledata "Seminar Setup" = RIMD,
+        table "Posted Seminar Charge" = X,
+        table "Posted Seminar Reg. Header" = X,
+        table "Posted Seminar Reg. Line" = X,
         table Seminar = X,
         table "Seminar Charge" = X,
         table "Seminar Comment Line" = X,
@@ -28,6 +34,10 @@ permissionset 50000 SeminarPermissions
         codeunit "Seminar Jnl.-Post Line" = X,
         codeunit "Seminar Notification Mgmt." = X,
         codeunit "Seminar Reg.-Show Ledger" = X,
+        page "Posted Seminar Charges" = X,
+        page "Posted Seminar Reg. List" = X,
+        page "Posted Seminar Reg. Subform" = X,
+        page "Posted Seminar Registration" = X,
         page "Seminar Card" = X,
         page "Seminar Charges" = X,
         page "Seminar Comment List" = X,
