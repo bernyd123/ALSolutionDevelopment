@@ -206,6 +206,24 @@ page 50010 "Seminar Registration"
                 }
             }
         }
+        area(processing)
+        {
+            group(Posting)
+            {
+                Caption = 'Posting';
+                action("Post")
+                {
+                    Caption = 'Post';
+                    Image = PostDocument;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+                    RunObject = Codeunit "Seminar-Post (Yes/No)";
+                    ShortCutKey = 'F9';
+                    ToolTip = 'Post the transaction.';
+                }
+            }
+        }
     }
 }
 

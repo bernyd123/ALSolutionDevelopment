@@ -110,6 +110,22 @@ page 50013 "Seminar Registration List"
                 }
             }
         }
+        area(processing)
+        {
+            group(Posting)
+            {
+                Caption = 'Posting';
+                action("Post")
+                {
+                    Caption = 'Post';
+                    Image = PostDocument;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = Codeunit "Seminar-Post (Yes/No)";
+                    ShortCutKey = 'F9';
+                }
+            }
+        }
     }
 }
 
