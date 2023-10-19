@@ -1,6 +1,8 @@
 // CSD1.00 - 2023-10-18 - B. During
 //   Chapter 4 - Lab 1
 //     - Created new table
+//   Lab1 - Added code to the validation trigger on the Posting Date
+//        - Added the EmplyLine Procedure to be used by posting routines.
 
 table 50031 "Seminar Journal Line"
 {
@@ -24,6 +26,12 @@ table 50031 "Seminar Journal Line"
         field(4; "Posting Date"; Date)
         {
             Caption = 'Posting Date';
+
+            //This code has changed in version 22 or 23 and may need revision to look at the setting in the General Ledger Setup. Investigation Needed
+            trigger OnValidate()
+            begin
+                Validate("Document Date", "Posting Date");
+            end;
         }
         field(5; "Document Date"; Date)
         {
@@ -148,5 +156,10 @@ table 50031 "Seminar Journal Line"
     fieldgroups
     {
     }
+
+    procedure EmptyLine(): Boolean
+    begin
+        exit(("Seminar No." = '') and (Quantity = 0));
+    end;
 }
 
