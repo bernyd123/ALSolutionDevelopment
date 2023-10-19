@@ -1,14 +1,14 @@
+// CSD1.00 - 2013-10-17 - B. During
+//   Chapter 3 - Lab 2
+//     - Created new page
+//   Lab 2 Completed
+//     - Changed the page type
+//     - Added the lines subpage and linked it to the main page
+//     - Changed the Customer Details factbox to correctly show the Bill-to Customer
+//     - Added the Seminar FactBox to the page
+
 page 50010 "Seminar Registration"
 {
-    // CSD1.00 - 2013-10-17 - B. During
-    //   Chapter 3 - Lab 2
-    //     - Created new page
-    //   Lab 2 Completed
-    //     - Changed the page type
-    //     - Added the lines subpage and linked it to the main page
-    //     - Changed the Customer Details factbox to correctly show the Bill-to Customer
-    //     - Added the Seminar FactBox to the page
-
     Caption = 'Seminar Registration';
     PageType = Document;
     SourceTable = "Seminar Registration Header";
@@ -190,8 +190,8 @@ page 50010 "Seminar Registration"
                     Caption = 'Comments';
                     Image = Comment;
                     RunObject = Page "Seminar Comment Sheet";
-                    RunPageLink = "No." = FIELD("No.");
-                    RunPageView = WHERE("Document Type" = CONST("Seminar Registration"));
+                    RunPageLink = "No." = Field("No.");
+                    RunPageView = Where("Document Type" = Const("Seminar Registration"));
                     ApplicationArea = All;
                     ToolTip = 'Demo Code;';
                 }
@@ -200,7 +200,7 @@ page 50010 "Seminar Registration"
                     Caption = 'Charges';
                     Image = Costs;
                     RunObject = Page "Seminar Charges";
-                    RunPageLink = "No." = FIELD("No.");
+                    RunPageLink = "No." = Field("No.");
                     ApplicationArea = All;
                     ToolTip = 'Demo Code;';
                 }

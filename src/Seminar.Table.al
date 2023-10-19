@@ -60,8 +60,8 @@ table 50000 Seminar
         }
         field(9; Comment; Boolean)
         {
-            CalcFormula = Exist("Comment Line" WHERE("Table Name" = CONST(Seminar),
-                                                      "No." = FIELD("No.")));
+            CalcFormula = Exist("Comment Line" Where("Table Name" = Const(Seminar),
+                                                      "No." = Field("No.")));
             Caption = 'Comment';
             Editable = false;
             FieldClass = FlowField;

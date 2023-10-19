@@ -92,8 +92,8 @@ page 50013 "Seminar Registration List"
                     Caption = 'Comments';
                     Image = Comment;
                     RunObject = page "Seminar Comment Sheet";
-                    RunPageLink = "No." = FIELD("No.");
-                    RunPageView = WHERE("Document Type" = CONST("Seminar Registration"));
+                    RunPageLink = "No." = Field("No.");
+                    RunPageView = Where("Document Type" = Const("Seminar Registration"));
                     ApplicationArea = All;
                     ToolTip = 'Demo Code;';
 
@@ -103,7 +103,7 @@ page 50013 "Seminar Registration List"
                     Caption = 'Charges';
                     Image = Costs;
                     RunObject = Page "Seminar Charges";
-                    RunPageLink = "Document No." = FIELD("No.");
+                    RunPageLink = "Document No." = Field("No.");
                     ApplicationArea = All;
                     ToolTip = 'Demo Code;';
 

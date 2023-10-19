@@ -82,7 +82,7 @@ page 50034 "Posted Seminar Registration"
             }
             part(SeminarRegistrationLines; "Posted Seminar Reg. Subform")
             {
-                SubPageLink = "Document No." = FIELD("No.");
+                SubPageLink = "Document No." = Field("No.");
                 ApplicationArea = All;
             }
             group("Seminar Room")
@@ -151,13 +151,13 @@ page 50034 "Posted Seminar Registration"
         {
             part(SeminarDetailsFactbox; "Seminar Details FactBox")
             {
-                SubPageLink = "No." = FIELD("Seminar No.");
+                SubPageLink = "No." = Field("Seminar No.");
                 ApplicationArea = All;
             }
             part(CustomerDetailsFactBox; "Customer Details FactBox")
             {
                 Provider = SeminarRegistrationLines;
-                SubPageLink = "No." = FIELD("Bill-to Customer No.");
+                SubPageLink = "No." = Field("Bill-to Customer No.");
                 ApplicationArea = All;
             }
             systempart(Links; Links)
@@ -183,8 +183,8 @@ page 50034 "Posted Seminar Registration"
                     Caption = 'Comments';
                     Image = Comment;
                     RunObject = Page "Seminar Comment Sheet";
-                    RunPageLink = "No." = FIELD("No.");
-                    RunPageView = WHERE("Document Type" = CONST("Posted Seminar Registration"));
+                    RunPageLink = "No." = Field("No.");
+                    RunPageView = Where("Document Type" = Const("Posted Seminar Registration"));
                     ApplicationArea = All;
                     ToolTip = 'Demo Code';
                 }
@@ -193,7 +193,7 @@ page 50034 "Posted Seminar Registration"
                     Caption = 'Charges';
                     Image = Costs;
                     RunObject = Page "Posted Seminar Charges";
-                    RunPageLink = "Document No." = FIELD("No.");
+                    RunPageLink = "Document No." = Field("No.");
                     ApplicationArea = All;
                     ToolTip = 'Demo Code';
                 }

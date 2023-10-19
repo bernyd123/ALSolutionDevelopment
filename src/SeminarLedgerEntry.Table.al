@@ -85,12 +85,12 @@ table 50032 "Seminar Ledger Entry"
         field(17; "Room Resource No."; Code[20])
         {
             Caption = 'Room Resource No.';
-            TableRelation = Resource WHERE(Type = CONST(Machine));
+            TableRelation = Resource Where(Type = Const(Machine));
         }
         field(18; "Instructor Resource No."; Code[20])
         {
             Caption = 'Instructor Resource No.';
-            TableRelation = Resource WHERE(Type = CONST(Person));
+            TableRelation = Resource Where(Type = Const(Person));
         }
         field(19; "Starting Date"; Date)
         {
@@ -112,7 +112,7 @@ table 50032 "Seminar Ledger Entry"
         field(23; "Source No."; Code[20])
         {
             Caption = 'Source No.';
-            TableRelation = IF ("Source Type" = CONST(Seminar)) Seminar;
+            TableRelation = if ("Source Type" = Const(Seminar)) Seminar;
         }
         field(24; "Journal Batch Name"; Code[10])
         {

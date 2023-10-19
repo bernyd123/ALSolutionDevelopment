@@ -29,7 +29,7 @@ table 50019 "Posted Seminar Reg. Line"
         }
         field(5; "Participant Name"; Text[100])
         {
-            CalcFormula = Lookup(Contact.Name WHERE("No." = FIELD("Participant Contact No.")));
+            CalcFormula = Lookup(Contact.Name Where("No." = Field("Participant Contact No.")));
             Caption = 'Participant Name';
             Editable = false;
             FieldClass = FlowField;

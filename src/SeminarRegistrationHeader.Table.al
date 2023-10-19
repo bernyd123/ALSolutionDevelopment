@@ -33,7 +33,7 @@ table 50010 "Seminar Registration Header"
             trigger OnValidate()
             begin
                 if "Starting Date" <> xRec."Starting Date" then
-                    TESTFIELD(Status, Status::Planning);
+                    TestField(Status, Status::Planning);
             end;
         }
         field(3; "Seminar No."; Code[20])
@@ -44,21 +44,21 @@ table 50010 "Seminar Registration Header"
             trigger OnValidate()
             begin
                 if "Seminar No." <> xRec."Seminar No." then begin
-                    SeminarRegLine.RESET();
-                    SeminarRegLine.SETRANGE("Document No.", "No.");
-                    SeminarRegLine.SETRANGE(Registered, TRUE);
+                    SeminarRegLine.Reset();
+                    SeminarRegLine.SetRange("Document No.", "No.");
+                    SeminarRegLine.SetRange(Registered, TRUE);
                     if NOT SeminarRegLine.ISEMPTY then
                         ERROR(
                           Text002,
-                          FIELDCAPTION("Seminar No."),
+                          FieldCaption("Seminar No."),
                           SeminarRegLine.TABLECAPTION,
-                          SeminarRegLine.FIELDCAPTION(Registered),
+                          SeminarRegLine.FieldCaption(Registered),
                           TRUE);
 
-                    Seminar.GET("Seminar No.");
-                    Seminar.TESTFIELD(Blocked, FALSE);
-                    Seminar.TESTFIELD("Gen. Prod. Posting Group");
-                    Seminar.TESTFIELD("VAT Prod. Posting Group");
+                    Seminar.Get("Seminar No.");
+                    Seminar.TestField(Blocked, FALSE);
+                    Seminar.TestField("Gen. Prod. Posting Group");
+                    Seminar.TestField("VAT Prod. Posting Group");
                     "Seminar Name" := Seminar.Name;
                     Duration := Seminar."Seminar Duration";
                     "Seminar Price" := Seminar."Seminar Price";
@@ -76,7 +76,7 @@ table 50010 "Seminar Registration Header"
         field(5; "Instructor Resource No."; Code[10])
         {
             Caption = 'Instructor Resource No.';
-            TableRelation = Resource WHERE(Type = CONST(Person));
+            TableRelation = Resource Where(Type = Const(Person));
 
             trigger OnValidate()
             begin
@@ -85,7 +85,7 @@ table 50010 "Seminar Registration Header"
         }
         field(6; "Instructor Name"; Text[100])
         {
-            CalcFormula = Lookup(Resource.Name WHERE("No." = FIELD("Instructor Resource No."), Type = CONST(Person)));
+            CalcFormula = Lookup(Resource.Name Where("No." = Field("Instructor Resource No."), Type = Const(Person)));
             Caption = 'Instructor Name';
             Editable = false;
             FieldClass = FlowField;
@@ -110,7 +110,7 @@ table 50010 "Seminar Registration Header"
         field(11; "Room Resource No."; Code[10])
         {
             Caption = 'Room Resource No.';
-            TableRelation = Resource WHERE(Type = CONST(Machine));
+            TableRelation = Resource Where(Type = Const(Machine));
 
             trigger OnValidate()
             begin
@@ -123,7 +123,7 @@ table 50010 "Seminar Registration Header"
                     "Room County" := '';
                     "Room Country/Reg. Code" := '';
                 end else begin
-                    SeminarRoom.GET("Room Resource No.");
+                    SeminarRoom.Get("Room Resource No.");
                     "Room Name" := SeminarRoom.Name;
                     "Room Address" := SeminarRoom.Address;
                     "Room Address 2" := SeminarRoom."Address 2";
@@ -139,7 +139,7 @@ table 50010 "Seminar Registration Header"
                             if CONFIRM(Text004, TRUE,
                                  "Maximum Participants",
                                  SeminarRoom."Maximum Participants",
-                                 FIELDCAPTION("Maximum Participants"),
+                                 FieldCaption("Maximum Participants"),
                                  "Maximum Participants",
                                  SeminarRoom."Maximum Participants")
                             then
@@ -198,12 +198,12 @@ table 50010 "Seminar Registration Header"
                 if ("Seminar Price" <> xRec."Seminar Price") AND
                    (Status <> Status::Canceled)
                 then begin
-                    SeminarRegLine.RESET();
-                    SeminarRegLine.SETRANGE("Document No.", "No.");
-                    SeminarRegLine.SETRANGE(Registered, FALSE);
-                    if SeminarRegLine.FINDSET() then
+                    SeminarRegLine.Reset();
+                    SeminarRegLine.SetRange("Document No.", "No.");
+                    SeminarRegLine.SetRange(Registered, FALSE);
+                    if SeminarRegLine.FindSet() then
                         if CONFIRM(Text005, FALSE,
-                             FIELDCAPTION("Seminar Price"),
+                             FieldCaption("Seminar Price"),
                              SeminarRegLine.TABLECAPTION)
                         then begin
                             repeat
@@ -227,7 +227,7 @@ table 50010 "Seminar Registration Header"
         }
         field(22; Comment; Boolean)
         {
-            CalcFormula = Exist("Seminar Comment Line" WHERE("Document Type" = CONST("Seminar Registration"), "No." = FIELD("No.")));
+            CalcFormula = Exist("Seminar Comment Line" Where("Document Type" = Const("Seminar Registration"), "No." = Field("No.")));
             Caption = 'Comment';
             Editable = false;
             FieldClass = FlowField;
@@ -260,8 +260,8 @@ table 50010 "Seminar Registration Header"
             begin
                 SeminarRegHeader := Rec;
                 SeminarSetup.Get();
-                SeminarSetup.TESTFIELD("Seminar Registration Nos.");
-                SeminarSetup.TESTFIELD("Posted Seminar Reg. Nos.");
+                SeminarSetup.TestField("Seminar Registration Nos.");
+                SeminarSetup.TestField("Posted Seminar Reg. Nos.");
                 if NoSeriesMgt.LookupSeries(SeminarSetup."Posted Seminar Reg. Nos.", SeminarRegHeader."Posting No. Series")
                 then
                     VALIDATE("Posting No. Series");
@@ -272,11 +272,11 @@ table 50010 "Seminar Registration Header"
             begin
                 if "Posting No. Series" <> '' then begin
                     SeminarSetup.Get();
-                    SeminarSetup.TESTFIELD("Seminar Registration Nos.");
-                    SeminarSetup.TESTFIELD("Posted Seminar Reg. Nos.");
+                    SeminarSetup.TestField("Seminar Registration Nos.");
+                    SeminarSetup.TestField("Posted Seminar Reg. Nos.");
                     NoSeriesMgt.TestSeries(SeminarSetup."Posted Seminar Reg. Nos.", "Posting No. Series");
                 end;
-                TESTFIELD("Posting No.", '');
+                TestField("Posting No.", '');
             end;
         }
         field(28; "Posting No."; Code[20])
@@ -303,36 +303,36 @@ table 50010 "Seminar Registration Header"
 
     trigger OnDelete()
     begin
-        TESTFIELD(Status, Status::Canceled);
+        TestField(Status, Status::Canceled);
 
-        SeminarRegLine.RESET();
-        SeminarRegLine.SETRANGE("Document No.", "No.");
-        SeminarRegLine.SETRANGE(Registered, TRUE);
+        SeminarRegLine.Reset();
+        SeminarRegLine.SetRange("Document No.", "No.");
+        SeminarRegLine.SetRange(Registered, TRUE);
         if SeminarRegLine.FIND('-') then
             ERROR(
               Text001,
               SeminarRegLine.TABLECAPTION,
-              SeminarRegLine.FIELDCAPTION(Registered),
+              SeminarRegLine.FieldCaption(Registered),
               TRUE);
-        SeminarRegLine.SETRANGE(Registered);
-        SeminarRegLine.DELETEALL(TRUE);
+        SeminarRegLine.SetRange(Registered);
+        SeminarRegLine.DeleteAll(TRUE);
 
-        SeminarCharge.RESET();
-        SeminarCharge.SETRANGE("Document No.", "No.");
+        SeminarCharge.Reset();
+        SeminarCharge.SetRange("Document No.", "No.");
         if NOT SeminarCharge.ISEMPTY then
             ERROR(Text006, SeminarCharge.TABLECAPTION);
 
-        SeminarCommentLine.RESET();
-        SeminarCommentLine.SETRANGE("Document Type", SeminarCommentLine."Document Type"::"Seminar Registration");
-        SeminarCommentLine.SETRANGE("No.", "No.");
-        SeminarCommentLine.DELETEALL();
+        SeminarCommentLine.Reset();
+        SeminarCommentLine.SetRange("Document Type", SeminarCommentLine."Document Type"::"Seminar Registration");
+        SeminarCommentLine.SetRange("No.", "No.");
+        SeminarCommentLine.DeleteAll();
     end;
 
     trigger OnInsert()
     begin
         if "No." = '' then begin
             SeminarSetup.Get();
-            SeminarSetup.TESTFIELD("Seminar Registration Nos.");
+            SeminarSetup.TestField("Seminar Registration Nos.");
             NoSeriesMgt.InitSeries(SeminarSetup."Seminar Registration Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
@@ -358,11 +358,11 @@ table 50010 "Seminar Registration Header"
     internal procedure AssistEdit(OldSeminarRegHeader: Record "Seminar Registration Header"): Boolean
     begin
         SeminarRegHeader := Rec;
-        SeminarSetup.GET();
-        SeminarSetup.TESTFIELD("Seminar Registration Nos.");
+        SeminarSetup.Get();
+        SeminarSetup.TestField("Seminar Registration Nos.");
         if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Registration Nos.", OldSeminarRegHeader."No. Series", SeminarRegHeader."No. Series") then begin
-            SeminarSetup.GET();
-            SeminarSetup.TESTFIELD("Seminar Registration Nos.");
+            SeminarSetup.Get();
+            SeminarSetup.TestField("Seminar Registration Nos.");
             NoSeriesMgt.SetSeries("No.");
             Rec := SeminarRegHeader;
             exit(TRUE);
@@ -372,9 +372,9 @@ table 50010 "Seminar Registration Header"
     procedure InitRecord()
     begin
         if "Posting Date" = 0D then
-            "Posting Date" := WORKDATE();
-        "Document Date" := WORKDATE();
-        SeminarSetup.GET();
+            "Posting Date" := WorkDate();
+        "Document Date" := WorkDate();
+        SeminarSetup.Get();
         NoSeriesMgt.SetDefaultSeries("Posting No. Series", SeminarSetup."Posted Seminar Reg. Nos.");
     end;
 }

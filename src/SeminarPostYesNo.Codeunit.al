@@ -20,10 +20,10 @@ codeunit 50004 "Seminar-Post (Yes/No)"
 
     local procedure "Code"()
     begin
-        IF NOT CONFIRM(Text001, FALSE) THEN
+        if NOT CONFIRM(Text001, FALSE) then
             EXIT;
         SeminarPost.Run(SeminarRegHeader);
-        COMMIT();
+        Commit();
     end;
 }
 

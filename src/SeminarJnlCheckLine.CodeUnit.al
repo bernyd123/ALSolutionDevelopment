@@ -55,7 +55,7 @@ codeunit 50031 "Seminar Jnl.-Check Line"
                 AllowPostingTo := GLSetup."Allow Posting To";
             end;
             if AllowPostingTo = 0D then
-                AllowPostingTo := 19991231D;
+                AllowPostingTo := 99991231D;
         end;
         if (SemJnlLine."Posting Date" < AllowPostingFrom) OR (SemJnlLine."Posting Date" > AllowPostingTo) then
             SemJnlLine.FieldError("Posting Date", Text001);

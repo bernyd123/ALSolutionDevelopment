@@ -64,7 +64,7 @@ page 50036 "Posted Seminar Reg. List"
         {
             part(SeminarDetailsFactbox; "Seminar Details FactBox")
             {
-                SubPageLink = "No." = FIELD("No.");
+                SubPageLink = "No." = Field("No.");
                 ApplicationArea = All;
             }
             systempart(Links; Links)
@@ -90,8 +90,8 @@ page 50036 "Posted Seminar Reg. List"
                     Caption = 'Comments';
                     Image = Comment;
                     RunObject = Page "Seminar Comment Sheet";
-                    RunPageLink = "No." = FIELD("No.");
-                    RunPageView = WHERE("Document Type" = CONST("Posted Seminar Registration"));
+                    RunPageLink = "No." = Field("No.");
+                    RunPageView = Where("Document Type" = Const("Posted Seminar Registration"));
                     ApplicationArea = All;
                     Tooltip = 'Demo Code';
                 }
@@ -100,7 +100,7 @@ page 50036 "Posted Seminar Reg. List"
                     Caption = 'Charges';
                     Image = Costs;
                     RunObject = Page "Posted Seminar Charges";
-                    RunPageLink = "Document No." = FIELD("No.");
+                    RunPageLink = "Document No." = Field("No.");
                     ApplicationArea = All;
                     Tooltip = 'Demo Code';
                 }

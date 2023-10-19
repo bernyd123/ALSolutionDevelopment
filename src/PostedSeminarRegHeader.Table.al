@@ -28,12 +28,12 @@ table 50018 "Posted Seminar Reg. Header"
         field(5; "Instructor Resource No."; Code[20])
         {
             Caption = 'Instructor Resource No.';
-            TableRelation = Resource WHERE(Type = CONST(Person));
+            TableRelation = Resource Where(Type = Const(Person));
         }
         field(6; "Instructor Name"; Text[100])
         {
-            CalcFormula = Lookup(Resource.Name WHERE("No." = FIELD("Instructor Resource No."),
-                                                      Type = CONST(Person)));
+            CalcFormula = Lookup(Resource.Name Where("No." = Field("Instructor Resource No."),
+                                                      Type = Const(Person)));
             Caption = 'Instructor Name';
             Editable = false;
             FieldClass = FlowField;
@@ -60,7 +60,7 @@ table 50018 "Posted Seminar Reg. Header"
         field(11; "Room Resource No."; Code[20])
         {
             Caption = 'Room Resource No.';
-            TableRelation = Resource WHERE(Type = CONST(Machine));
+            TableRelation = Resource Where(Type = Const(Machine));
         }
         field(12; "Room Name"; Text[30])
         {
@@ -78,8 +78,6 @@ table 50018 "Posted Seminar Reg. Header"
         {
             Caption = 'Room Post Code';
             TableRelation = "Post Code".Code;
-            //This property is currently not supported
-            //TestTableRelation = false;
             ValidateTableRelation = false;
         }
         field(16; "Room City"; Text[30])
@@ -112,8 +110,8 @@ table 50018 "Posted Seminar Reg. Header"
         }
         field(22; Comment; Boolean)
         {
-            CalcFormula = Exist("Seminar Comment Line" WHERE("Document Type" = CONST("Posted Seminar Registration"),
-                                                              "No." = FIELD("No.")));
+            CalcFormula = Exist("Seminar Comment Line" Where("Document Type" = Const("Posted Seminar Registration"),
+                                                              "No." = Field("No.")));
             Caption = 'Comment';
             Editable = false;
             FieldClass = FlowField;

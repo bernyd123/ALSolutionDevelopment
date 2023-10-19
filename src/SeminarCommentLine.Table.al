@@ -56,12 +56,12 @@ table 50004 "Seminar Comment Line"
     var
         SeminarCommentLine: Record "Sales Comment Line";
     begin
-        SeminarCommentLine.SETRANGE("Document Type", "Document Type");
-        SeminarCommentLine.SETRANGE("No.", "No.");
-        SeminarCommentLine.SETRANGE("Document Line No.", "Document Line No.");
-        SeminarCommentLine.SETRANGE(Date, WORKDATE());
+        SeminarCommentLine.SetRange("Document Type", "Document Type");
+        SeminarCommentLine.SetRange("No.", "No.");
+        SeminarCommentLine.SetRange("Document Line No.", "Document Line No.");
+        SeminarCommentLine.SetRange(Date, WorkDate());
         if NOT SeminarCommentLine.IsEmpty() then
-            Date := WORKDATE();
+            Date := WorkDate();
     end;
 }
 

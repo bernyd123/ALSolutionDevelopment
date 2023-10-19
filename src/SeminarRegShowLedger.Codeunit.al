@@ -8,8 +8,8 @@ codeunit 50034 "Seminar Reg.-Show Ledger"
 
     trigger OnRun()
     begin
-        SeminarLedgerEntry.SETRANGE("Entry No.", Rec."From Entry No.", Rec."To Entry No.");
-        PAGE.RUN(PAGE::"Seminar Ledger Entries", SeminarLedgerEntry);
+        SeminarLedgerEntry.SetRange("Entry No.", Rec."From Entry No.", Rec."To Entry No.");
+        Page.Run(Page::"Seminar Ledger Entries", SeminarLedgerEntry);
     end;
 
     var

@@ -88,8 +88,8 @@ page 50001 "Seminar List"
                     Caption = 'Comments';
                     Image = Comment;
                     RunObject = Page "Comment Sheet";
-                    RunPageLink = "Table Name" = CONST(Seminar),
-                                  "No." = FIELD("No.");
+                    RunPageLink = "Table Name" = Const(Seminar),
+                                  "No." = Field("No.");
                 }
             }
         }

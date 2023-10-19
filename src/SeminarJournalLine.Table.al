@@ -45,7 +45,7 @@ table 50031 "Seminar Journal Line"
         {
             Caption = 'Document No.';
         }
-        field(8; Description; Text[50])
+        field(8; Description; Text[100])
         {
             Caption = 'Description';
         }
@@ -82,7 +82,7 @@ table 50031 "Seminar Journal Line"
             Caption = 'Participant Contact No.';
             TableRelation = Contact;
         }
-        field(17; "Participant Name"; Text[50])
+        field(17; "Participant Name"; Text[100])
         {
             Caption = 'Participant Name';
         }
@@ -94,12 +94,12 @@ table 50031 "Seminar Journal Line"
         field(19; "Room Resource No."; Code[20])
         {
             Caption = 'Room Resource No.';
-            TableRelation = Resource WHERE(Type = CONST(Machine));
+            TableRelation = Resource Where(Type = Const(Machine));
         }
         field(20; "Instructor Resource No."; Code[20])
         {
             Caption = 'Instructor Resource No.';
-            TableRelation = Resource WHERE(Type = CONST(Person));
+            TableRelation = Resource Where(Type = Const(Person));
         }
         field(21; "Starting Date"; Date)
         {
@@ -121,7 +121,7 @@ table 50031 "Seminar Journal Line"
         field(31; "Source No."; Code[20])
         {
             Caption = 'Source No.';
-            TableRelation = IF ("Source Type" = CONST(Seminar)) Seminar;
+            TableRelation = if ("Source Type" = Const(Seminar)) Seminar;
         }
         field(32; "Journal Batch Name"; Code[10])
         {

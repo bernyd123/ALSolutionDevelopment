@@ -27,9 +27,9 @@ table 50021 "Posted Seminar Charge"
         field(4; "No."; Code[20])
         {
             Caption = 'No.';
-            TableRelation = IF (Type = CONST(Resource)) Resource
-            ELSE
-            IF (Type = CONST("G/L Account")) "G/L Account"."No.";
+            TableRelation = if (Type = Const(Resource)) Resource
+            else
+            if (Type = Const("G/L Account")) "G/L Account"."No.";
         }
         field(5; Description; Text[50])
         {
@@ -65,8 +65,8 @@ table 50021 "Posted Seminar Charge"
         field(11; "Unit of Measure Code"; Code[10])
         {
             Caption = 'Unit of Measure Code';
-            TableRelation = IF (Type = CONST(Resource)) "Resource Unit of Measure" WHERE("Resource No." = FIELD("No."))
-            ELSE
+            TableRelation = if (Type = Const(Resource)) "Resource Unit of Measure" Where("Resource No." = Field("No."))
+            else
             "Unit of Measure";
         }
         field(12; "Gen. Prod. Posting Group"; Code[10])

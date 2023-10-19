@@ -27,8 +27,8 @@ table 50011 "Seminar Registration Line"
                 if "Bill-to Customer No." <> xRec."Bill-to Customer No." then
                     if Registered then
                         ERROR(Text001,
-                          FIELDCAPTION("Bill-to Customer No."),
-                          FIELDCAPTION(Registered),
+                          FieldCaption("Bill-to Customer No."),
+                          FieldCaption(Registered),
                           Registered);
             end;
         }
@@ -39,16 +39,16 @@ table 50011 "Seminar Registration Line"
 
             trigger OnLookup()
             begin
-                ContactBusinessRelation.RESET();
-                ContactBusinessRelation.SETRANGE("Link to Table", ContactBusinessRelation."Link to Table"::Customer);
-                ContactBusinessRelation.SETRANGE("No.", "Bill-to Customer No.");
+                ContactBusinessRelation.Reset();
+                ContactBusinessRelation.SetRange("Link to Table", ContactBusinessRelation."Link to Table"::Customer);
+                ContactBusinessRelation.SetRange("No.", "Bill-to Customer No.");
                 if ContactBusinessRelation.FINDFIRST() then begin
-                    Contact.SETRANGE("Company No.", ContactBusinessRelation."Contact No.");
-                    if PAGE.RUNMODAL(PAGE::"Contact List", Contact) = ACTION::LookupOK then
+                    Contact.SetRange("Company No.", ContactBusinessRelation."Contact No.");
+                    if Page.RunModal(Page::"Contact List", Contact) = ACTION::LookupOK then
                         "Participant Contact No." := Contact."No.";
                 end;
 
-                CALCFIELDS("Participant Name");
+                CalcFields("Participant Name");
             end;
 
             trigger OnValidate()
@@ -56,11 +56,11 @@ table 50011 "Seminar Registration Line"
                 if ("Bill-to Customer No." <> '') AND
                    ("Participant Contact No." <> '')
                 then begin
-                    Contact.GET("Participant Contact No.");
-                    ContactBusinessRelation.RESET();
+                    Contact.Get("Participant Contact No.");
+                    ContactBusinessRelation.Reset();
                     ContactBusinessRelation.SETCURRENTKEY("Link to Table", "No.");
-                    ContactBusinessRelation.SETRANGE("Link to Table", ContactBusinessRelation."Link to Table"::Customer);
-                    ContactBusinessRelation.SETRANGE("No.", "Bill-to Customer No.");
+                    ContactBusinessRelation.SetRange("Link to Table", ContactBusinessRelation."Link to Table"::Customer);
+                    ContactBusinessRelation.SetRange("No.", "Bill-to Customer No.");
                     if ContactBusinessRelation.FINDFIRST() then
                         if ContactBusinessRelation."Contact No." <> Contact."Company No." then
                             ERROR(Text002, Contact."No.", Contact.Name, "Bill-to Customer No.");
@@ -69,7 +69,7 @@ table 50011 "Seminar Registration Line"
         }
         field(5; "Participant Name"; Text[100])
         {
-            CalcFormula = Lookup(Contact.Name WHERE("No." = FIELD("Participant Contact No.")));
+            CalcFormula = Lookup(Contact.Name Where("No." = Field("Participant Contact No.")));
             Caption = 'Participant Name';
             Editable = false;
             FieldClass = FlowField;
@@ -144,8 +144,8 @@ table 50011 "Seminar Registration Line"
 
             trigger OnValidate()
             begin
-                TESTFIELD("Bill-to Customer No.");
-                TESTFIELD("Seminar Price");
+                TestField("Bill-to Customer No.");
+                TestField("Seminar Price");
                 GLSetup.Get();
                 Amount := ROUND(Amount, GLSetup."Amount Rounding Precision");
                 "Line Discount Amount" := "Seminar Price" - Amount;
@@ -176,13 +176,13 @@ table 50011 "Seminar Registration Line"
 
     trigger OnDelete()
     begin
-        TESTFIELD(Registered, FALSE);
+        TestField(Registered, FALSE);
     end;
 
     trigger OnInsert()
     begin
         GetSeminarRegHeader();
-        "Registration Date" := WORKDATE();
+        "Registration Date" := WorkDate();
         "Seminar Price" := SeminarRegHeader."Seminar Price";
         Amount := SeminarRegHeader."Seminar Price";
     end;
@@ -200,7 +200,7 @@ table 50011 "Seminar Registration Line"
     internal procedure GetSeminarRegHeader()
     begin
         if SeminarRegHeader."No." <> "Document No." then
-            SeminarRegHeader.GET("Document No.");
+            SeminarRegHeader.Get("Document No.");
     end;
 
     internal procedure CalculateAmount()
