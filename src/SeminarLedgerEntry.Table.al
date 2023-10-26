@@ -4,10 +4,16 @@
 //   Lab 1 - Rename and renumber fields according to instructions
 //         - Updated the keys to look at new primary key fields
 //         - Added the User ID field
+// Chapter 5 - Lab 2
+//     - Added keys:
+//     - Document No.,Posting Date
+//     - Defined the LookupPageID and DrillDownPageID properties
 
 table 50032 "Seminar Ledger Entry"
 {
     Caption = 'Seminar Ledger Entry';
+    LookupPageId = "Seminar Ledger Entries";
+    DrillDownPageId = "Seminar Ledger Entries";
 
     fields
     {
@@ -148,6 +154,9 @@ table 50032 "Seminar Ledger Entry"
         key(Key1; "Entry No.")
         {
             Clustered = true;
+        }
+        key(Key2; "Document No.", "Posting Date")
+        {
         }
     }
 

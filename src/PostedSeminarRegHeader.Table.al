@@ -1,10 +1,14 @@
 // CSD1.00 - 2023-10-18 - B. During
 //   Chapter 4 - Lab 3
 //     - Created new table
+// Chapter 5 - Lab 2
+//     - Set the LookupPageID and DrillDownPageID properties
 
 table 50018 "Posted Seminar Reg. Header"
 {
     Caption = 'Posted Seminar Reg. Header';
+    LookupPageId = "Posted Seminar Reg. List";
+    DrillDownPageId = "Posted Seminar Reg. List";
 
     fields
     {

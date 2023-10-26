@@ -1,6 +1,8 @@
 // CSD1.00 - 2023-10-18 - B. During
 //   Chapter 4 - Lab 3
 //     - Created new page
+// Chapter 5 - Lab 2
+//     - Added the Navigate action
 
 page 50034 "Posted Seminar Registration"
 {
@@ -198,7 +200,34 @@ page 50034 "Posted Seminar Registration"
                     ToolTip = 'Demo Code';
                 }
             }
+            action(Navigate)
+            {
+                ApplicationArea = All;
+                Caption = 'Find entries...';
+                Image = Navigate;
+                Scope = Repeater;
+                ShortcutKey = 'Ctrl+Alt+Q';
+                ToolTip = 'Find entries and documents that exist for the selected document. (Formerly known as Navigate)';
+
+                trigger OnAction()
+                begin
+                    NavigatePage.SetDoc(Rec."Posting Date", rec."No.");
+                    NavigatePage.Run();
+                end;
+            }
+        }
+        area(Promoted)
+        {
+            group(Category_Process)
+            {
+                actionref(Navigate_Promoted; Navigate)
+                {
+                }
+            }
         }
     }
+
+    var
+        NavigatePage: Page Navigate;
 }
 
