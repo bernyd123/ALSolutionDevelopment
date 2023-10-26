@@ -6,6 +6,8 @@
 //     - Changed Room Code to Room Resource No.
 //     - Added code to OnDelete to check if seminar is Registered and block Deletion if it is.
 //     - Create InitRecord Procedure and move code to InitRecord 
+//   Chapter 5 - Lab 1
+//     - Added code to the OnInsert trigger to apply the record link filter
 
 table 50010 "Seminar Registration Header"
 {
@@ -337,6 +339,10 @@ table 50010 "Seminar Registration Header"
         end;
 
         InitRecord();
+
+        if GetFilter("Seminar No.") <> '' then
+            if GetRangeMin("Seminar No.") = GetRangeMax("Seminar No.") then
+                Validate("Seminar No.", GetRangeMin("Seminar No."));
     end;
 
     var

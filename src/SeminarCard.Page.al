@@ -2,6 +2,13 @@
 //   Chapter 2 - Lab 2
 //     - Created new page
 //     - Added Teaching Tips and in app tours
+// Chapter 5 - Lab 1
+//     - Added actions:
+//     - New (Seminar Registration)
+//     - Seminar Ledger Entries
+//     - Registrations
+
+//TODO Upgrade Promoted Actions to new Promotion
 
 page 50000 "Seminar Card"
 {
@@ -115,6 +122,68 @@ page 50000 "Seminar Card"
                     RunObject = Page "Comment Sheet";
                     RunPageLink = "Table Name" = Const(Seminar),
                                   "No." = Field("No.");
+                }
+            }
+            group(History)
+            {
+                Caption = 'History';
+                Image = History;
+                action("Ledger Entries")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Ledger Entries';
+                    Image = WarrantyLedger;
+                    RunObject = Page "Seminar Ledger Entries";
+                    RunPageLink = "Seminar No." = field("No.");
+                    ShortCutKey = 'Ctrl+F7';
+                    ToolTip = 'View the history of transactions that have been posted for the selected record.';
+                }
+            }
+            group(Registration)
+            {
+                Image = SalesInvoice;
+                action(Registrations)
+                {
+                    RunObject = page "Seminar Registration List";
+                    RunPageLink = "Seminar No." = field("No.");
+                    Image = Timesheet;
+                    ToolTip = 'View all the registrations for this seminar.';
+                }
+            }
+        }
+        area(Creation)
+        {
+            action(NewSeminarReg)
+            {
+                AccessByPermission = TableData "Seminar Registration Header" = RIM;
+                ApplicationArea = All;
+                Caption = 'Seminar Registration';
+                Image = NewTimesheet;
+                RunObject = Page "Seminar Registration";
+                RunPageLink = "Seminar No." = field("No.");
+                RunPageMode = Create;
+                ToolTip = 'Offer items or services to a customer.';
+            }
+        }
+        area(Promoted)
+        {
+            group(Category_Category4)
+            {
+                Caption = 'New Document';
+
+                actionref(NewSeminarReg_Promoted; NewSeminarReg)
+                {
+                }
+            }
+            group(Category_Category5)
+            {
+                Caption = 'Seminar';
+
+                actionref(LedgerEntries_Promoted; "Ledger Entries")
+                {
+                }
+                actionref(SeminarRegistrations_Promoted; Registrations)
+                {
                 }
             }
         }
